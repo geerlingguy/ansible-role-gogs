@@ -1,0 +1,62 @@
+#! /bin/bash
+# /etc/init.d/gogs
+#
+
+### BEGIN INIT INFO
+# Provides:          gogs
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start gogs at boot time.
+# Description:       Control gogs.
+### END INIT INFO
+
+start_gogs() {
+  nohup {{ gogs_user_home }}/gogs/start.sh > {{ gogs_user_home }}/gogs/log/gogs.log 2>&1&
+}
+
+# Gogs needs a home path.
+export HOME={{ gogs_user_home }}
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+    ps aux | grep 'gogs' | grep -v grep | grep -vq start
+    if [ $? = 0 ]; then
+      echo "Gogs is already running."
+    else
+      start_gogs
+    fi
+    ;;
+  stop)
+    ps aux | grep 'gogs' | grep -v grep | grep -vq stop
+    if [ $? = 0 ]; then
+      echo "Stopping Gogs."
+      kill `ps -ef | grep 'gogs' | grep -v grep | awk '{print $2}'`
+    else
+      echo "Gogs is already stopped."
+    fi
+    ;;
+  restart)
+    ps aux | grep 'gogs' | grep -v grep | grep -vq restart
+    if [ $? = 0 ]; then
+      kill `ps -ef | grep 'gogs' | grep -v grep | awk '{print $2}'`
+    fi
+    start_gogs
+    ;;
+  status)
+    ps aux | grep 'gogs' | grep -v grep | grep -vq status
+    if [ $? = 0 ]; then
+      echo "Gogs is running."
+    else
+      echo "Gogs is stopped."
+    fi
+    ;;
+  *)
+    echo "Usage: /etc/init.d/gogs {start|stop|restart|status}"
+    exit 1
+    ;;
+esac
+
+exit 0

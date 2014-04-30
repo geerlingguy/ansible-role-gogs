@@ -1,0 +1,51 @@
+---
+- name: Ensure unzip is installed (RedHat).
+  yum: pkg=unzip state=installed
+  when: ansible_os_family == 'RedHat'
+
+- name: Ensure unzip is installed (Debian).
+  apt: pkg=unzip state=installed
+  when: ansible_os_family == 'Debian'
+
+- name: Create user for Gogs.
+  user: >
+    name={{ gogs_user }}
+    comment=Gogs
+    home={{ gogs_user_home }}
+    shell=/bin/bash
+
+- name: Download Gogs.
+  get_url: >
+    url={{ gogs_binary_url }}
+    dest={{ gogs_user_home }}/gogs.zip
+    owner={{ gogs_user }} group={{ gogs_user }}
+
+- name: Expand Gogs.
+  shell: >
+    su -c "unzip {{ gogs_user_home }}/gogs.zip -d {{ gogs_user_home }}" -s /bin/bash {{ gogs_user }} 
+    chdir={{ gogs_user_home }}
+    creates={{ gogs_user_home }}/gogs/gogs
+
+- include: gogs-mysql.yml
+
+- name: Copy gogs init file.
+  template: >
+    src=gogs-init.j2
+    dest=/etc/init.d/gogs
+    owner=root group=root mode=755
+
+- name: Create Gogs log folder.
+  file: >
+    path={{ gogs_user_home }}/gogs/log
+    state=directory
+    owner={{ gogs_user }} group={{ gogs_user }} mode=755
+
+- name: Check if Gogs is running.
+  command: service gogs status
+  changed_when: false
+  register: gogs_status
+
+- name: Ensure Gogs is running.
+  shell: >
+    su -c "service gogs start" -s /bin/bash {{ gogs_user }}
+  when: "'running' not in gogs_status.stdout"
