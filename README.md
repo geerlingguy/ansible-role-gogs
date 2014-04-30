@@ -1,5 +1,7 @@
 # Ansible Role: Gogs
 
+[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-gogs.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-gogs)
+
 Installs [Gogs](https://github.com/gogits/gogs), a Go-based front-end to Git, on RedHat or Debian-based linux systems.
 
 After the playbook is finished, visit the gogs server (on port 3000 by default), and you will be redirected to the /install page, where you can configure an administrator account and other default options.
