@@ -1,4 +1,8 @@
 ---
+# Include variables and define needed variables.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
 - name: Ensure unzip is installed (RedHat).
   yum: pkg=unzip state=installed
   when: ansible_os_family == 'RedHat'
@@ -27,15 +31,8 @@
     chdir={{ gogs_user_home }}
     creates={{ gogs_user_home }}/gogs/gogs
 
+- include: init-setup.yml
 - include: gogs-mysql.yml
-
-- name: Copy gogs init file.
-  template:
-    src: gogs-init.j2
-    dest: /etc/init.d/gogs
-    owner: root
-    group: root
-    mode: 0755
 
 - name: Create Gogs log folder.
   file:
@@ -45,12 +42,5 @@
     group: "{{ gogs_user }}"
     mode: 0755
 
-- name: Check if Gogs is running.
-  command: service gogs status
-  changed_when: false
-  register: gogs_status
-
 - name: Ensure Gogs is running.
-  shell: >
-    su -c "service gogs start" -s /bin/bash {{ gogs_user }}
-  when: "'running' not in gogs_status.stdout"
+  service: name=gogs state=started enabled=yes
