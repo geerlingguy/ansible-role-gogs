@@ -22,7 +22,7 @@
 
 - name: Expand Gogs.
   shell: >
-    su -c "unzip {{ gogs_user_home }}/gogs.zip -d {{ gogs_user_home }}" -s /bin/bash {{ gogs_user }} 
+    su -c "unzip {{ gogs_user_home }}/gogs.zip -d {{ gogs_user_home }}" -s /bin/bash {{ gogs_user }}
     chdir={{ gogs_user_home }}
     creates={{ gogs_user_home }}/gogs/gogs
 

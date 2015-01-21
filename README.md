@@ -12,7 +12,7 @@ Requires git (via `geerlingguy.git`), and at least the Gogs HTTP port (3000 by d
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `vars/main.yml`):
+Available variables are listed below, along with default values (see `defaults/main.yml`):
 
     gogs_user: git
     gogs_user_home: /home/git
