@@ -16,7 +16,6 @@
     name: "{{ gogs_user }}"
     comment: Gogs
     home: "{{ gogs_user_home }}"
-    shell: /bin/bash
 
 - name: Download Gogs.
   get_url:

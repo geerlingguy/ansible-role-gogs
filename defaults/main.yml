@@ -1,7 +1,7 @@
 ---
 gogs_user: git
 gogs_user_home: /home/git
-gogs_binary_url: https://github.com/gogits/gogs/releases/download/v0.5.11/linux_amd64.zip
+gogs_binary_url: https://github.com/gogits/gogs/releases/download/v0.6.15/linux_amd64.zip
 gogs_http_port: "3000"
 gogs_use_mysql: false
 gogs_db_name: gogs
