@@ -21,7 +21,7 @@ env:
 
 matrix:
   allow_failures:
-    - distribution: centos
+    - env: distribution=centos
 
 services:
   - docker
