@@ -42,6 +42,7 @@ script:
 
   # Test role.
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml'
+  # DEBUGGING
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml'
 
   # Test role idempotence.
@@ -51,6 +52,7 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
+  # DEBUGGING
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm sudo service gogs status'
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm sudo service gogs restart'
   - sleep 10

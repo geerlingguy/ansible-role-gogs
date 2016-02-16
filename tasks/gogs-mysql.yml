@@ -10,9 +10,11 @@
     - ::1
     - localhost
   when: gogs_use_mysql
+  notify: restart gogs
 
 - name: Create Gogs MySQL database.
   mysql_db:
     db: "{{ gogs_db_name }}"
     state: present
   when: gogs_use_mysql
+  notify: restart gogs
