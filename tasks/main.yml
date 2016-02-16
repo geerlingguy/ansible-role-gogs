@@ -25,10 +25,12 @@
     group: "{{ gogs_user }}"
 
 - name: Expand Gogs.
-  shell: >
-    su -c "unzip {{ gogs_user_home }}/gogs.zip -d {{ gogs_user_home }}" -s /bin/bash {{ gogs_user }}
-    chdir={{ gogs_user_home }}
-    creates={{ gogs_user_home }}/gogs/gogs
+  unarchive:
+    src: "{{ gogs_user_home }}/gogs.zip"
+    dest: "{{ gogs_user_home }}"
+    group: "{{ gogs_user }}"
+    owner: "{{ gogs_user }}"
+    copy: no
 
 - include: init-setup.yml
 - include: gogs-mysql.yml

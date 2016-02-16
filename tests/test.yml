@@ -5,14 +5,16 @@
       yum: 'name="{{ item }}" state=present'
       with_items:
         - curl
-        - sudo
+        - tar
+        - unzip
       when: ansible_os_family == 'RedHat'
 
     - name: Ensure build dependencies are installed (Debian).
       apt: 'name="{{ item }}" state=installed'
       with_items:
         - curl
-        - sudo
+        - tar
+        - unzip
       when: ansible_os_family == 'Debian'
 
   roles:
