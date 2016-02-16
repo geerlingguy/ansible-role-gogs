@@ -2,14 +2,14 @@
 sudo: required
 
 env:
-  - distribution: centos
-    version: 6
-    init: /sbin/init
-    run_opts: ""
-  - distribution: centos
-    version: 7
-    init: /usr/lib/systemd/systemd
-    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  # - distribution: centos
+  #   version: 6
+  #   init: /sbin/init
+  #   run_opts: ""
+  # - distribution: centos
+  #   version: 7
+  #   init: /usr/lib/systemd/systemd
+  #   run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - distribution: ubuntu
     version: 14.04
     init: /sbin/init
@@ -18,14 +18,6 @@ env:
     version: 12.04
     init: /sbin/init
     run_opts: ""
-
-matrix:
-  allow_failures:
-    - env:
-      - distribution: centos
-        version: 7
-        init: /usr/lib/systemd/systemd
-        run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
 
 services:
   - docker
