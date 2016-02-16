@@ -17,4 +17,4 @@
 # SEE: https://github.com/ansible/ansible-modules-core/issues/191
 - name: Restart systemctl daemon on systemd systems.
   shell: systemctl daemon-reload
-  when: gogs_file_symlinks.changed and ansible_os_family == "RedHat" and ansible_lsb.major_release|int == 7
+  when: gogs_file_symlinks.changed and (ansible_os_family == "RedHat" and ansible_distribution_major_version|int == 7)
