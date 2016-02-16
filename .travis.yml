@@ -6,10 +6,10 @@ env:
     version: 6
     init: /sbin/init
     run_opts: ""
-  # - distribution: centos
-  #   version: 7
-  #   init: /usr/lib/systemd/systemd
-  #   run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+  - distribution: centos
+    version: 7
+    init: /usr/lib/systemd/systemd
+    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - distribution: ubuntu
     version: 14.04
     init: /sbin/init
@@ -18,6 +18,10 @@ env:
     version: 12.04
     init: /sbin/init
     run_opts: ""
+
+matrix:
+  allow_failures:
+    - distribution: centos
 
 services:
   - docker
@@ -42,8 +46,6 @@ script:
 
   # Test role.
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml'
-  # DEBUGGING
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml'
 
   # Test role idempotence.
   - >
@@ -51,11 +53,6 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
-
-  # DEBUGGING
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm sudo service gogs status'
-  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm sudo service gogs restart'
-  - sleep 10
 
   # Check if we get an installation page.
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm curl http://localhost:3000/install'
