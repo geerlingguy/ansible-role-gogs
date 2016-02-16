@@ -17,12 +17,17 @@
     comment: Gogs
     home: "{{ gogs_user_home }}"
 
+- name: Check if Gogs is already installed.
+  stat: path=/usr/local/bin/gogs
+  register: gogs_bin
+
 - name: Download Gogs.
   get_url:
     url: "{{ gogs_binary_url }}"
     dest: "{{ gogs_user_home }}/gogs.zip"
     owner: "{{ gogs_user }}"
     group: "{{ gogs_user }}"
+  when: gogs_bin.stat.islnk is not defined
 
 - name: Expand Gogs.
   unarchive:
@@ -31,6 +36,7 @@
     group: "{{ gogs_user }}"
     owner: "{{ gogs_user }}"
     copy: no
+  when: gogs_bin.stat.islnk is not defined
 
 - include: init-setup.yml
 - include: gogs-mysql.yml
