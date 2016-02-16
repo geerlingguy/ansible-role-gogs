@@ -12,7 +12,6 @@
       apt: 'name="{{ item }}" state=installed'
       with_items:
         - curl
-        - which
       when: ansible_os_family == 'Debian'
 
   roles:
