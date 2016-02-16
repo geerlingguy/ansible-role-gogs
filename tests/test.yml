@@ -5,6 +5,7 @@
       yum: 'name="{{ item }}" state=present'
       with_items:
         - curl
+        - sudo
         - which
       when: ansible_os_family == 'RedHat'
 
@@ -12,6 +13,7 @@
       apt: 'name="{{ item }}" state=installed'
       with_items:
         - curl
+        - sudo
       when: ansible_os_family == 'Debian'
 
   roles:

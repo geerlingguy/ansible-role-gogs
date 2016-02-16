@@ -51,6 +51,10 @@ script:
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm sudo service gogs status'
+  - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm sudo service gogs restart'
+  - sleep 10
+
   # Check if we get an installation page.
   - 'sudo docker exec --tty "$(cat ${container_id})" env TERM=xterm curl http://localhost:3000/install'
 

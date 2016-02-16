@@ -9,12 +9,6 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     state: link
-  register: gogs_file_symlinks
   with_items:
     - { src: "{{ gogs_user_home }}/gogs/gogs", dest: "/usr/local/bin/gogs" }
     - { src: "{{ gogs_user_home }}/{{ gogs_init_script_path }}" , dest: "/etc/init.d/gogs" }
-
-# SEE: https://github.com/ansible/ansible-modules-core/issues/191
-- name: Restart systemctl daemon on systemd systems.
-  shell: systemctl daemon-reload
-  when: gogs_file_symlinks.changed and (ansible_os_family == "RedHat" and ansible_distribution_major_version|int == 7)
