@@ -9,7 +9,7 @@ env:
     init: /sbin/init
     run_opts: ""
   - distro: ubuntu1604
-    init: /usr/lib/systemd/systemd
+    init: /lib/systemd/systemd
     run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
   - distro: ubuntu1404
     init: /sbin/init
