@@ -4,6 +4,13 @@
     path: "{{ gogs_user_home }}/{{ gogs_init_script_path }}"
     mode: 0755
 
+- name: Set path to Gogs in init script.
+  lineinfile:
+    dest: "{{ gogs_user_home }}/{{ gogs_init_script_path }}"
+    line: "WORKINGDIR={{ gogs_user_home }}/gogs"
+    regexp: "^WORKINGDIR=.*"
+  notify: restart gogs
+
 - name: Symlink Gogs binary and startup scripts.
   file:
     src: "{{ item.src }}"
