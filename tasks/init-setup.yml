@@ -11,6 +11,13 @@
     regexp: "^WORKINGDIR=.*"
   notify: restart gogs
 
+- name: Set user in Gogs init script.
+  lineinfile:
+    dest: "{{ gogs_user_home }}/{{ gogs_init_script_path }}"
+    line: "USER={{ gogs_user }}"
+    regexp: "^USER=.*"
+  notify: restart gogs
+
 - name: Symlink Gogs binary and startup scripts.
   file:
     src: "{{ item.src }}"
