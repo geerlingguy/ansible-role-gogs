@@ -14,8 +14,7 @@
     - { src: "{{ gogs_user_home }}/{{ gogs_init_script_path }}" , dest: "/etc/init.d/gogs" }
   notify: restart gogs
 
-
-- name: Enable Gogs service
-  command: systemctl enable gogs
-  when: ansible_os_family == 'Debian' and ansible_distribution_major_version == "8"
-
+- name: Enable gogs service
+  service:
+    name: gogs
+    enabled: yes
