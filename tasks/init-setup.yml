@@ -13,3 +13,8 @@
     - { src: "{{ gogs_user_home }}/gogs/gogs", dest: "/usr/local/bin/gogs" }
     - { src: "{{ gogs_user_home }}/{{ gogs_init_script_path }}" , dest: "/etc/init.d/gogs" }
   notify: restart gogs
+
+- name: Enable gogs service
+  service:
+    name: gogs
+    enabled: yes
