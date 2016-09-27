@@ -1,2 +1,8 @@
 ---
 gogs_init_script_path: gogs/scripts/init/debian/gogs
+
+gogs_init_script_configuration_items:
+- regexp: "^WORKINGDIR=.*"
+  line: "WORKINGDIR={{ gogs_user_home }}/gogs"
+- regexp: "^USER=.*"
+  line: "USER={{ gogs_user }}"
