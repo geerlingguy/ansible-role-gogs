@@ -44,17 +44,11 @@ MySQL database support. Set `gogs_use_mysql` to `true` to configure MySQL for go
       vars_files:
         - vars/main.yml
       roles:
-        - { role: geerlingguy.gogs }
+        - geerlingguy.gogs
 
 *Inside `vars/main.yml`*:
 
     gogs_http_port: "8080"
-
-## TODO
-
-  - Preconfigure gogs so installation is simpler/more robust.
-  - Make Gogs version more easily configurable.
-  - (Maybe) add option to build Gogs from source (instead of binary installation).
 
 ## License
 
