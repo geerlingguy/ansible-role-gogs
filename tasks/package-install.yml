@@ -1,0 +1,37 @@
+---
+
+- name: add packager.io apt key
+  apt_key:
+    url: "https://deb.packager.io/key"
+    state: present
+
+- name: Add gogs repository
+  apt_repository:
+    repo: "{{ gogs_ubuntu_repo }}"
+    state: present
+
+- name: Update apt cache.
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Ensure Gogs is installed on Debian.
+  apt: "name={{ item }} state=installed"
+  with_items: "gogs"
+
+- name: Install extra commands
+  copy: 
+    src: "files/{{ item }}"
+    dest: "/opt/gogs/vendor/pkgr/processes"
+    owner: gogs
+    group: gogs
+    mode: 0755
+  with_items:
+    - backup
+    - restore
+
+- name: Start gogs at boot-time
+  service:
+    name: "gogs"
+    state: "started"
+    enabled: yes
+
+

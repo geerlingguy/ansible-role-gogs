@@ -34,6 +34,15 @@ HTTP port over which Gogs will be accessed.
 
 MySQL database support. Set `gogs_use_mysql` to `true` to configure MySQL for gogs, using the database name, username, and password defined by the respective variables.
 
+You can also install through the packages provided by packager.io.
+
+    gogs_install_method: package
+
+Currently only available for supported Debian and Ubuntu versions.
+
+    # Change "xenial" to your distibution's code name (eg. precise, trusty, jessie)
+    gogs_ubuntu_repo: "deb https://deb.packager.io/gh/pkgr/gogs xenial pkgr"
+
 ## Dependencies
 
   - geerlingguy.git
