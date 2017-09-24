@@ -1,5 +1,8 @@
 - hosts: all
 
+  vars:
+    gogs_http_port: "3210"
+
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=yes cache_valid_time=600

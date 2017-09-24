@@ -21,7 +21,7 @@ script:
   - ${PWD}/tests/test.sh
 
   # Check if we get an installation page.
-  - 'docker exec --tty ${container_id} env TERM=xterm curl http://localhost:3000/install'
+  - 'docker exec --tty ${container_id} env TERM=xterm curl http://localhost:3210/install'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

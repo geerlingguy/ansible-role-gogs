@@ -18,7 +18,7 @@ Type=simple
 User={{ gogs_user }}
 Group={{ gogs_user }}
 WorkingDirectory={{ gogs_user_home }}/gogs
-ExecStart={{ gogs_user_home }}/gogs/gogs web
+ExecStart={{ gogs_user_home }}/gogs/gogs web -p {{ gogs_http_port }}
 Restart=always
 Environment=USER={{ gogs_user }} HOME={{ gogs_user_home }}
 
