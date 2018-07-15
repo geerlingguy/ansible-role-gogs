@@ -2,7 +2,7 @@
 
 - name: add packager.io apt key
   apt_key:
-    url: "https://deb.packager.io/key"
+    url: "https://dl.packager.io/srv/pkgr/gogs/key"
     state: present
 
 - name: Add gogs repository
