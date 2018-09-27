@@ -30,7 +30,7 @@
     dest: "{{ gogs_user_home }}"
     group: "{{ gogs_user }}"
     owner: "{{ gogs_user }}"
-    copy: no
+    copy: false
   when: gogs_bin.stat.islnk is not defined
 
 - include: init-setup.yml
