@@ -3,6 +3,7 @@ dependencies:
   - geerlingguy.git
 
 galaxy_info:
+  role_name: gogs
   author: geerlingguy
   description: "Gogs: Go Git Service"
   company: "Midwestern Mac, LLC"
