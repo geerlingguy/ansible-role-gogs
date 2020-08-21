@@ -5,7 +5,7 @@
     mode: 0755
 
 - name: Symlink Gogs binary and startup scripts.
-  file:
+  file:  # noqa 208
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     state: link

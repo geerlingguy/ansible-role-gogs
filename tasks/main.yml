@@ -31,6 +31,7 @@
     group: "{{ gogs_user }}"
     owner: "{{ gogs_user }}"
     copy: false
+    mode: 0755
   when: gogs_bin.stat.islnk is not defined
 
 - include: init-setup.yml
