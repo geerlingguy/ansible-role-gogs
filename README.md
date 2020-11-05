@@ -1,6 +1,6 @@
 # Ansible Role: Gogs
 
-[![Build Status](https://travis-ci.com/geerlingguy/ansible-role-gogs.svg?branch=master)](https://travis-ci.com/geerlingguy/ansible-role-gogs)
+[![CI](https://github.com/geerlingguy/ansible-role-gogs/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-gogs/actions?query=workflow%3ACI)
 
 Installs [Gogs](https://github.com/gogits/gogs), a Go-based front-end to Git, on RedHat or Debian-based linux systems.
 
